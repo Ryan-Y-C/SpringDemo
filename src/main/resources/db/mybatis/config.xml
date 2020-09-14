@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE configuration
+        PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-config.dtd">
+<configuration>
+<!--    <settings>-->
+<!--        <setting name="logImpl" value="LOG4J"/>-->
+<!--    </settings>-->
+    <typeAliases>
+        <typeAlias type="SpringWeb.entity.RankItem" alias="rankItem"/>
+        <typeAlias type="SpringWeb.entity.User" alias="User"/>
+    </typeAliases>
+    <mappers>
+        <mapper resource="db/mybatis/Mapper.xml"></mapper>
+<!--        使用注解方式需要配置Mapper-->
+        <mapper class="SpringWeb.dao.UserMapper"></mapper>
+    </mappers>
+</configuration>

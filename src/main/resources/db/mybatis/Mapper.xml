@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="MyMapper">
+    <select id="selectRank" resultMap="rank">
+        select t.user_id, t.score_sum, USER.name as user_name
+        from (select USER_ID, sum(SCORE) as score_sum from MATCH group by USER_ID order by score_sum desc) t
+                 inner join USER
+                            on t.USER_ID = USER.ID
+    </select>
+    <!--  property 对应java对象的属性  column对应数据库的列-->
+    <resultMap id="rank" type="rankItem" autoMapping="true">
+        <id column="id" property="id"/>
+        <result property="score" column="score_sum"/>
+        <association property="user" javaType="User">
+            <result property="id" column="user_id"/>
+            <result property="name" column="user_name"/>
+        </association>
+    </resultMap>
+</mapper>
