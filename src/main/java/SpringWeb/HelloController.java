@@ -1,10 +1,13 @@
 package SpringWeb;
 
+import SpringWeb.anno.Cache;
 import SpringWeb.entity.RankItem;
 
 import SpringWeb.service.RankService;
 import org.springframework.beans.factory.annotation.Autowired;
 
+import org.springframework.context.annotation.Configuration;
+import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
@@ -39,8 +42,8 @@ public class HelloController {
         return rankService.getRank();
     }
 
+
     @RequestMapping("/")
-//    @ResponseBody
     public ModelAndView index() {
         List<RankItem> items=rankService.getRank();
         HashMap <String,Object> model =new HashMap<>();
@@ -55,9 +58,9 @@ public class HelloController {
         result.put("结果", Arrays.asList("a","b"));
         return result;
     }
-
     @RequestMapping("/rankData")
     @ResponseBody
+    @Cache
     public Object getRankData(){
         return rankService.getRank();
     }
